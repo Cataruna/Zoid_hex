@@ -7,7 +7,6 @@
   #include <SoftwareSerial.h>
   SoftwareSerial maestroSerial(10, 12);
 #endif
-// links and stuffpula  https://pololu.github.io/maestro-arduino/class_mini_maestro.html#a658c315bbe3e01f7ac587fa658864e56
 
 MiniMaestro maestro(maestroSerial);
 const float h = 52.0;
@@ -40,7 +39,9 @@ String tr;
 String pa;
 String ci;
 String sa;
-float divisions = 12.0;
+float divisions = 12.0; //In theory, the leg tip should describe a circle. Realistically, it will be a polygon. 
+                        //This float is the number of edges in said polygon
+                        //The higher this number, the smoother the movement, but also more processing to be done
 char receivedChar;
 boolean newData = false;
 
@@ -184,9 +185,6 @@ void mapi(int var){
 
 
 void inversekinematics(float x, float y, float z, int timputz, int var){
-
-  
-
   L1 = x*x + y*y;
   L1 = sqrt(L1);
 
@@ -209,8 +207,6 @@ void inversekinematics(float x, float y, float z, int timputz, int var){
   beta = acos(beta);
 
   beta *= 57.3;
-
-
 
   /////////////////////////////////////////////////////////////////////
   gamma = atan2(x, y);
@@ -281,7 +277,6 @@ void inversekinematics(float x, float y, float z, int timputz, int var){
       Serial.print("Real gamma is:  ");
       Serial.println(gamma); 
       */
-
 }
 
 
@@ -313,7 +308,6 @@ void goforth(float radius, int timputz){
     y += yoffset;
     z += zoffset;
     inversekinematics(x, y, z, timputz,1);
-    
     
     ///////////////////////////////////////leg 4
     z = sin(phi4)*radius + zoffset;
@@ -398,7 +392,6 @@ void goforth(float radius, int timputz){
   inv = false;
 
 }
-
 
 
 void turn(float radius, int timputz, char direction, int multi){
