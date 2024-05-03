@@ -1,4 +1,4 @@
-# Zoidberg4
-This is my hexapod robot!
+# Zoid_hex
+This is my hexapod robot, zoid 4.3!
 
-It walks, turns, stands, sits and is being awesome
+Working on a better, smoother gait
