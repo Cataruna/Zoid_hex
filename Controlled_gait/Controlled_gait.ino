@@ -25,9 +25,9 @@ float x = 0.0;
 float y = 0.0;
 float z = 0.0;
 
-int ga = 0;
-int al = 0;
-int be = 0;
+int gamma_mapped = 0;
+int alpha_mapped = 0;
+int beta_mapped = 0;
 bool inv = false;
 const float xoffset = 70.0;
 const float yoffset = 70.0;
@@ -39,9 +39,9 @@ String tr;
 String pa;
 String ci;
 String sa;
-float divisions = 12.0; //In theory, the leg tip should describe a circle. Realistically, it will be a polygon. 
+float divisions = 12.0; //In theory, the leg tip should describe a circle. Realistically, it will beta_mapped a polygon. 
                         //This float is the number of edges in said polygon
-                        //The higher this number, the smoother the movement, but also more processing to be done
+                        //The higher this number, the smoother the movement, but also more processing to beta_mapped done
 char receivedChar;
 boolean newData = false;
 
@@ -71,66 +71,66 @@ void total_target(int t){
   }
 }
 
-
-void mapi(int var){
+void maping_degreesToPulses(int var){
 
   if(var == 1) {
-    ga = map(gamma,-90,  90, 580, 2470);            //primuservo 0
-    al = map(alpha, 0, 180, 2395, 500);            //doi servo  1
-    be = map(beta,  30, 180, 500, 2140);            //trei servo distal 2
-    maestro.setTarget(17, ga*4);
-    maestro.setTarget(16, al*4);
-    maestro.setTarget(15, be*4);
+    gamma_mapped = map(gamma,-90,  90, 580, 2470);            //primuservo 0
+    alpha_mapped = map(alpha, 0, 180, 2395, 500);            //doi servo  1
+    beta_mapped = map(beta,  30, 180, 500, 2140);            //trei servo distal 2
+    maestro.setTarget(17, gamma_mapped*4); //!shouldn't change this directly to the 4X ?
+    maestro.setTarget(16, alpha_mapped*4);
+    maestro.setTarget(15, beta_mapped*4);
   
   }
   if(var == 2) {
-    ga = map(gamma,-90,  90, 550, 2452);            //primuservo  1
-    al = map(alpha, 0, 180, 2360, 500);            //doi servo  2
-    be = map(beta,  30, 180, 550, 2198);            //trei servo distal 3
-    maestro.setTarget(12, ga*4);
-    maestro.setTarget(13, al*4);
-    maestro.setTarget(14, be*4);
+    gamma_mapped = map(gamma,-90,  90, 550, 2452);            //primuservo  1
+    alpha_mapped = map(alpha, 0, 180, 2360, 500);            //doi servo  2
+    beta_mapped = map(beta,  30, 180, 550, 2198);            //trei servo distal 3
+    maestro.setTarget(12, gamma_mapped*4);
+    maestro.setTarget(13, alpha_mapped*4);
+    maestro.setTarget(14, beta_mapped*4);
   }
   if(var == 3) {
-    ga = map(gamma,-90,  90, 540, 2450);            //primuservo  1
-    al = map(alpha, 0, 180, 2350, 500);            //doi servo  2
-    be = map(beta,  30, 180, 540, 2190);    
-    maestro.setTarget(9, ga*4);
-    maestro.setTarget(10, al*4);
-    maestro.setTarget(11, be*4);        //trei servo distal 3
+    gamma_mapped = map(gamma,-90,  90, 540, 2450);            //primuservo  1
+    alpha_mapped = map(alpha, 0, 180, 2350, 500);            //doi servo  2
+    beta_mapped = map(beta,  30, 180, 540, 2190);    
+    maestro.setTarget(9, gamma_mapped*4);
+    maestro.setTarget(10, alpha_mapped*4);
+    maestro.setTarget(11, beta_mapped*4);        //trei servo distal 3
   }
   if(var == 4) {
-    ga = round_up(map(gamma,-90,  90, 560, 2530));            //primuservo  1
-    al = round_up(map(alpha, 0, 180, 2490, 560));            //doi servo  2
-    be = round_up(map(beta,  30, 180, 560, 2190));
+    gamma_mapped = round_up(map(gamma,-90,  90, 560, 2530));            //primuservo  1
+    alpha_mapped = round_up(map(alpha, 0, 180, 2490, 560));            //doi servo  2
+    beta_mapped = round_up(map(beta,  30, 180, 560, 2190));
     
-    maestro.setTarget(6, ga*4);
-    maestro.setTarget(7, al*4);
-    maestro.setTarget(8, be*4);          //trei servo distal 3
+    maestro.setTarget(6, gamma_mapped*4);
+    maestro.setTarget(7, alpha_mapped*4);
+    maestro.setTarget(8, beta_mapped*4);          //trei servo distal 3
     
     Serial.println(maestro.getPosition(6));
   }
   if(var == 5) {
-    ga = map(gamma,-90,  90, 570, 2485);            //primuservo  1
-    al = map(alpha, 0, 180, 2450, 525);            //doi servo  2
-    be = map(beta,  30, 180, 530, 2175);
-    maestro.setTarget(3, ga*4);
-    maestro.setTarget(4, al*4);
-    maestro.setTarget(5, be*4);           //trei servo distal 3
+    gamma_mapped = map(gamma,-90,  90, 570, 2485);            //primuservo  1
+    alpha_mapped = map(alpha, 0, 180, 2450, 525);            //doi servo  2
+    beta_mapped = map(beta,  30, 180, 530, 2175);
+    maestro.setTarget(3, gamma_mapped*4);
+    maestro.setTarget(4, alpha_mapped*4);
+    maestro.setTarget(5, beta_mapped*4);           //trei servo distal 3
   }
   if(var == 6) {
-    ga = map(gamma,-90,  90, 600, 2500);            //primuservo  1
-    al = map(alpha, 0, 180, 2430, 560);            //doi servo  2
-    be = map(beta,  30, 180, 560, 2215);
-    maestro.setTarget(0, ga*4);
-    maestro.setTarget(1, al*4);
-    maestro.setTarget(2, be*4);           //trei servo distal 3
+    gamma_mapped = map(gamma,-90,  90, 600, 2500);            //primuservo  1
+    alpha_mapped = map(alpha, 0, 180, 2430, 560);            //doi servo  2
+    beta_mapped = map(beta,  30, 180, 560, 2215);
+    maestro.setTarget(0, gamma_mapped*4);
+    maestro.setTarget(1, alpha_mapped*4);
+    maestro.setTarget(2, beta_mapped*4);           //trei servo distal 3
   } 
 
 }
 
 
-void inversekinematics(float x, float y, float z, int timputz, int var){
+void inversekinematics(float x, float y, float z, int timputz, int hip_servo_number){
+  //! don't touch this >>>>>
   L1 = x*x + y*y;
   L1 = sqrt(L1);
 
@@ -154,6 +154,7 @@ void inversekinematics(float x, float y, float z, int timputz, int var){
   gamma = atan2(x, y);
   gamma *= 57.3;
   //gamma -= 90;
+  //! don't touch this ^^^^^
       
   if(alpha<0){
       Serial.print("Real alpha is:  ");
@@ -165,7 +166,6 @@ void inversekinematics(float x, float y, float z, int timputz, int var){
       Serial.println(alpha);
       alpha = 180;
     }
-
   if(beta<30){
       Serial.print("Real beta is:  ");
       Serial.println(beta);
@@ -186,30 +186,11 @@ void inversekinematics(float x, float y, float z, int timputz, int var){
       Serial.println(gamma);
       gamma = 90;
     }
-  if(var == 1) {
-      mapi(1);
+  
+  if ((hip_servo_number == 3 || hip_servo_number == 6) && inv) {
+    gamma *= -1;
   }
-  else if(var == 2) {
-      mapi(2);
-    }
-  else if(var == 3) {
-      if (inv){
-      gamma *= -1;
-      }
-      mapi(3);
-    }
-  else if(var == 4) {
-      mapi(4);
-    }
-  else if(var == 5) {
-      mapi(5);
-    }
-  else if(var == 6) {
-      if (inv){
-      gamma *= -1;
-      }
-      mapi(6);
-    }
+  maping_degreesToPulses(hip_servo_number);
 
       // Serial.print("Real alpha is:  ");
       // Serial.println(alpha);
@@ -224,7 +205,7 @@ void inversekinematics(float x, float y, float z, int timputz, int var){
 void goforth(float radius, int timputz){
   inv = true;
   //best radius is 30. 10 & 20 are too small and 40 seems to  become erratic
-  // however 40 or 50 could be used for higher speeds
+  // however 40 or 50 could beta_mapped used for higher speeds
   float i = 6.2832/divisions; // 2 pi over divisions
   float phi1 = 0;
   float phi3 = 3.142;  //0.785;
@@ -456,7 +437,7 @@ void up_and_down(float igrec,float max, float min, int timputz){
 void back_and_forth(float radius, int timputz, float zet){
   inv = true;
   //best radius is 30. 10 & 20 are too small and 40 seems to  become erratic
-  // however 40 or 50 could be used for higher speeds
+  // however 40 or 50 could beta_mapped used for higher speeds
   float i = 6.2832/divisions; // 2 pi pe divizii
   float phi1 = 3.14;
   float phi3 = 0;  //0.785;
@@ -636,7 +617,7 @@ if(direction == 'd'){
 
 void one_leg(float radius, int timputz){
   //best radius is 30. 10 & 20 are too small and 40 seems to  become erratic
-  // however 40 or 50 could be used for higher speeds
+  // however 40 or 50 could beta_mapped used for higher speeds
   float i = 6.2832/divisions; // 2 pi pe divizii
   float phi1 = 0;
   float phi3 = 0;  //0.785;
