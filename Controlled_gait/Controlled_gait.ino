@@ -74,60 +74,51 @@ void total_target(int t){
 void maping_degreesToPulses(int var){
 
   if(var == 1) {
-    gamma_mapped = map(gamma,-90,  90, 580, 2470);            //primuservo 0
-    alpha_mapped = map(alpha, 0, 180, 2395, 500);            //doi servo  1
-    beta_mapped = map(beta,  30, 180, 500, 2140);            //trei servo distal 2
-    maestro.setTarget(17, gamma_mapped*4); //!shouldn't change this directly to the 4X ?
-    maestro.setTarget(16, alpha_mapped*4);
-    maestro.setTarget(15, beta_mapped*4);
-  
+    gamma_mapped = map(gamma,-90,  90, 580, 2470);            
+    alpha_mapped = map(alpha, 0, 180, 2395, 500);            
+    beta_mapped = map(beta,  30, 180, 500, 2140);            
+    setTarg(17,16,15); //!shouldn't change this directly to the 4X ?
   }
   if(var == 2) {
-    gamma_mapped = map(gamma,-90,  90, 550, 2452);            //primuservo  1
-    alpha_mapped = map(alpha, 0, 180, 2360, 500);            //doi servo  2
-    beta_mapped = map(beta,  30, 180, 550, 2198);            //trei servo distal 3
-    maestro.setTarget(12, gamma_mapped*4);
-    maestro.setTarget(13, alpha_mapped*4);
-    maestro.setTarget(14, beta_mapped*4);
+    gamma_mapped = map(gamma,-90,  90, 550, 2452);           
+    alpha_mapped = map(alpha, 0, 180, 2360, 500);            
+    beta_mapped = map(beta,  30, 180, 550, 2198);            
+    setTarg(12,13,14);
   }
   if(var == 3) {
-    gamma_mapped = map(gamma,-90,  90, 540, 2450);            //primuservo  1
-    alpha_mapped = map(alpha, 0, 180, 2350, 500);            //doi servo  2
+    gamma_mapped = map(gamma,-90,  90, 540, 2450);          
+    alpha_mapped = map(alpha, 0, 180, 2350, 500);            
     beta_mapped = map(beta,  30, 180, 540, 2190);    
-    maestro.setTarget(9, gamma_mapped*4);
-    maestro.setTarget(10, alpha_mapped*4);
-    maestro.setTarget(11, beta_mapped*4);        //trei servo distal 3
+    setTarg(9,10,11);      
   }
   if(var == 4) {
-    gamma_mapped = round_up(map(gamma,-90,  90, 560, 2530));            //primuservo  1
-    alpha_mapped = round_up(map(alpha, 0, 180, 2490, 560));            //doi servo  2
+    gamma_mapped = round_up(map(gamma,-90,  90, 560, 2530));
+    alpha_mapped = round_up(map(alpha, 0, 180, 2490, 560));            
     beta_mapped = round_up(map(beta,  30, 180, 560, 2190));
-    
-    maestro.setTarget(6, gamma_mapped*4);
-    maestro.setTarget(7, alpha_mapped*4);
-    maestro.setTarget(8, beta_mapped*4);          //trei servo distal 3
+    setTarg(6,7,8);         
     
     Serial.println(maestro.getPosition(6));
   }
   if(var == 5) {
-    gamma_mapped = map(gamma,-90,  90, 570, 2485);            //primuservo  1
-    alpha_mapped = map(alpha, 0, 180, 2450, 525);            //doi servo  2
+    gamma_mapped = map(gamma,-90,  90, 570, 2485);
+    alpha_mapped = map(alpha, 0, 180, 2450, 525); 
     beta_mapped = map(beta,  30, 180, 530, 2175);
-    maestro.setTarget(3, gamma_mapped*4);
-    maestro.setTarget(4, alpha_mapped*4);
-    maestro.setTarget(5, beta_mapped*4);           //trei servo distal 3
+    setTarg(3,4,5);           
   }
   if(var == 6) {
-    gamma_mapped = map(gamma,-90,  90, 600, 2500);            //primuservo  1
-    alpha_mapped = map(alpha, 0, 180, 2430, 560);            //doi servo  2
+    gamma_mapped = map(gamma,-90,  90, 600, 2500); 
+    alpha_mapped = map(alpha, 0, 180, 2430, 560);  
     beta_mapped = map(beta,  30, 180, 560, 2215);
-    maestro.setTarget(0, gamma_mapped*4);
-    maestro.setTarget(1, alpha_mapped*4);
-    maestro.setTarget(2, beta_mapped*4);           //trei servo distal 3
+    setTarg(0,1,2);          
   } 
-
 }
 
+void setTarg(int hip, int femur, int tibia){
+  maestro.setTarget(hip, gamma_mapped*4);
+  maestro.setTarget(femur, alpha_mapped*4);
+  maestro.setTarget(tibia, beta_mapped*4); 
+
+}
 
 void inversekinematics(float x, float y, float z, int timputz, int hip_servo_number){
   //! don't touch this >>>>>
