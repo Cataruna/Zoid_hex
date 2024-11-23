@@ -1,8 +1,8 @@
+// This file is used as example, the ones to test are in test_pio_1/src and are cpp files
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
-// Create an object for the PCA9685
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 // Define servo min and max pulse lengths (tune based on your servos)

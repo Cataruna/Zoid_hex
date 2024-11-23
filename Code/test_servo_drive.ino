@@ -1,3 +1,4 @@
+// This file is used as example, the ones to test are in test_pio_1/src and are cpp files
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
